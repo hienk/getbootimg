@@ -62,11 +62,11 @@ jobs:
         cd output && tar -cvzf bootimg.tgz boot.img
         
     - name: Upload Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: bootimg
-          path: payload_dumper/output/boot.img
-          
+      uses: actions/upload-artifact@v3
+      with:
+        name: bootimg
+        path: payload_dumper/output/boot.img
+        
     - name: Upload the bootimg to NetDisks
       run: |
         # WeTransfer
