@@ -5,6 +5,12 @@ name: Get boot.img from MIUI Stock ROM
 on:
   # Trigger the workflow on push or pull request,
   # but only for the main branch
+  workflow_dispatch:
+    inputs:
+     ROM_URL:
+      description: 'OTA Url'
+      required: true
+      default: ''
   push:
     branches:
       - main
@@ -43,10 +49,9 @@ jobs:
         git clone https://github.com/vm03/payload_dumper.git
         git clone https://github.com/iamleot/transferwee.git
         
-    - name: Download the ROM
+    - name: Download ROM
       run: |
-        cd ~
-        wget -O rom.zip $ROM_URL
+        axel -n $(nproc) ${{ github.event.inputs.ROM_URL }} -o rom.zip
         
     - name: Unzip&Remove the ROM
       run: |
