@@ -52,12 +52,13 @@ jobs:
         
     - name: Download ROM
       run: |
-        axel -n $(nproc) ${{ github.event.inputs.ROM_URL }} -o rom.zip
+        cd ~
+        axel -n $(nproc) ${{ github.event.inputs.ROM_URL }}
         
     - name: Unzip&Remove the ROM
       run: |
         cd ~
-        unzip rom.zip -d payload_dumper && rm -v rom.zip
+        unzip *.zip -d payload_dumper && rm -v *.zip
         
     - name: Extract&Zip bootimg from the payload.bin
       run: |
